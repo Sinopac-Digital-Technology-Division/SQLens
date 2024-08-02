@@ -1,6 +1,6 @@
-# SQLineage
+# SQLens
 
-SQLineage is a Python library designed to extract data lineage from SQL statements, prioritizing support for all dialects. Traditional token-based parsers, like [sqlglot](https://github.com/tobymao/sqlglot) and [sql-metadata](https://github.com/macbre/sql-metadata), often encounter parsing issues when a query includes dialect-specific keywords. Instead of parsing the query statement, SQLineage extracts the necessary information from the database execution plan. Therefore, regardless of the dialect or version you use, as long as the database can process and output the execution plan, SQLineage will function correctly.
+SQLens is a Python library designed to extract data lineage from SQL statements, prioritizing support for all dialects. Traditional token-based parsers, like [sqlglot](https://github.com/tobymao/sqlglot) and [sql-metadata](https://github.com/macbre/sql-metadata), often encounter parsing issues when a query includes dialect-specific keywords. Instead of parsing the query statement, SQLens extracts the necessary information from the database execution plan. Therefore, regardless of the dialect or version you use, as long as the database can process and output the execution plan, SQLens will function correctly.
 
 ## Examples
 
@@ -11,8 +11,8 @@ A simple code snippet to get all `Relation` objects from the input query stateme
 python
 
 ```python
-from sqlineage.dialects import tsql
-from sqlineage.utils import Connection
+from sqlens.dialects import tsql
+from sqlens.utils import Connection
 
 conn = Connection(
   "127.0.0.1",  # DB IP address
@@ -32,10 +32,10 @@ relations = tsql.TSQL(conn).get_relation(query)
 
 ### Integrate into Existing Analysis Workflow
 
-SQLineage is designed to fully support [OpenLineage](https://openlineage.io/docs/) and make integrating with existing workflows as easy as possible. Developers can create a [SQLAlchemy engine](https://docs.sqlalchemy.org/en/20/core/engines.html) with hook functions attached by `sqlineage.create_engine`. An OpenLineage event can be easily recorded by passing the engine connection into `pandas.read_sql`.
+SQLens is designed to fully support [OpenLineage](https://openlineage.io/docs/) and make integrating with existing workflows as easy as possible. Developers can create a [SQLAlchemy engine](https://docs.sqlalchemy.org/en/20/core/engines.html) with hook functions attached by `sqlens.create_engine`. An OpenLineage event can be easily recorded by passing the engine connection into `pandas.read_sql`.
 
 ```python
-from sqlineage import create_engine
+from sqlens import create_engine
 import pandas as pd
 
 hooked_engine = create_engine(
@@ -54,4 +54,4 @@ with hooked_engine.connect() as conn:
 
 ## Keep In Touch
 
-Currently, SQLineage is under active development. The interface and implementation are subject to change. Please feel free to open an issue if you have any feature requests or implementation suggestions.
+Currently, SQLens is under active development. The interface and implementation are subject to change. Please feel free to open an issue if you have any feature requests or implementation suggestions.
